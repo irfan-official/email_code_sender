@@ -11,22 +11,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  return res.status(200).send("welcome to code ender via email");
+  return res.status(200).send("Welcome to code sender via email");
 });
 
 app.post("/send-mail", async (req, res) => {
   const { email, code } = req.body;
 
   const transporter = nodemailer.createTransport({
-    service: "gmail", // or use SMTP config
+    host: process.env.EMAIL_HOST, // Hostinger SMTP host
+    port: process.env.EMAIL_PORT, // 465 for SSL, 587 for TLS
+    secure: true, // true for 465, false for 587
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
+      user: process.env.EMAIL_USER, // Your Hostinger email
+      pass: process.env.EMAIL_PASS, // Email password
     },
   });
 
   const mailOptions = {
-    from: process.env.EMAIL_USER,
+    from: `"Irfan" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: "Your Verification Code",
     text: `Your verification code is: ${code}`,
