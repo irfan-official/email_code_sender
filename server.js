@@ -1,10 +1,18 @@
 import express from "express";
 import nodemailer from "nodemailer";
 import { config } from "dotenv";
+import cors from "cors";
 config();
 
 const app = express();
+
+app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get("/", (req, res) => {
+  return res.status(200).send("welcome to code ender via email");
+});
 
 app.post("/send-mail", async (req, res) => {
   const { email, code } = req.body;
