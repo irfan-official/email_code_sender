@@ -6,7 +6,12 @@ config();
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://url.irfans.dev", // Allow only this origin
+    credentials: true, // If you need to send cookies or authentication headers
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
