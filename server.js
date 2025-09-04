@@ -16,7 +16,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  return res.status(200).send("Welcome to code sender via email\n developed by: Kazi Irfan,you can POST form data as well as json data \n POST request to /send-mail with (target_email,verification_code)");
+  return res.status(200)
+    .send(`Welcome to code sender via email\n developed by: Kazi Irfan,you can POST form data as well as json data \n POST request to /send-mail with (target_email,verification_code)
+    example:
+    axios.post(
+      "https://email.code-sender.irfans.dev/send-mail",
+      {
+        email: "irfanofficial.work@gmail.com",
+        code: 4193,
+      }
+    );
+    `);
 });
 
 app.post("/send-mail", async (req, res) => {
