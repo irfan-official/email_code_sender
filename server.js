@@ -22,8 +22,8 @@ app.get("/", (req, res) => {
     axios.post(
       "https://email.code-sender.irfans.dev/send-mail",
       {
-        email: "irfanofficial.work@gmail.com",
-        code: 4193,
+        email: "target_email", // String
+        code: verification_code, // Number
       }
     );
     `);
